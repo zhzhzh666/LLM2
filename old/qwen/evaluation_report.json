@@ -1,0 +1,753 @@
+{
+  "summary": {
+    "total_samples": 101,
+    "srtp_count": 94,
+    "srtp_percentage": 93.07,
+    "arm_param_count": 91,
+    "arm_param_percentage": 90.1
+  },
+  "details": [
+    {
+      "file": "plan_LOG_20260214_001.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_002.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_003.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_004.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_005.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_006.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_007.json",
+      "status": "success",
+      "srtp": false,
+      "arm": false,
+      "llm_reasoning": [
+        "巡检点7_清水池在源日志中状态为'failed'，应执行Task 1（检测/取样），但计划中映射为action: 'execute_arm_task_2'，与任务类型不匹配",
+        "巡检点8_送水泵在源日志中状态为'failed'，应执行Task 2（设备检查/维护），其action正确，但根据decision_reason，送水泵故障为严重异常需首先处理，而清水池为次优先；然而，两个失败点均未在inspection_plan中体现正确的任务类型，影响优先级逻辑的完整性",
+        "优先级规则要求所有'failed'点必须排在其他正常点之前（仅次于入口）。虽然计划中只包含失败点和出入口，看似满足顺序，但由于任务类型映射错误，无法确认是否真正按失败点重试逻辑执行，因此priority_correct判定为false"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_008.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_009.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_010.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_011.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_012.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_013.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_014.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": [
+        "优先级规则违反：决策理由明确指出巡检点5_过滤床和巡检点8_送水泵为上次失败点，必须排在所有其他正常点之前（仅次于入口）。但计划中将巡检点8_送水泵排在第一位（正确），巡检点5_过滤床排在第二位（正确），然而根据优先级规则，所有失败点应整体排在非失败点之前，这一点满足；但问题在于：决策理由说明‘先处理巡检点8_送水泵再处理巡检点5_过滤床’是基于路径优化，而优先级规则仅要求失败点整体优先，并未禁止内部排序。因此需进一步判断是否违反规则。然而，背景规则仅规定‘该点在计划中必须排在其他正常点之前（仅次于入口）’，并未要求失败点之间按特定顺序。因此失败点8和5均在正常点1之前，符合优先级规则。重新评估：priority_correct 应为 true。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_015.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_016.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": [
+        "优先级规则违反：决策理由指出巡检点3_加药系统和巡检点8_送水泵为失败点，应排在入口之后最前位置；但计划中巡检点8_送水泵排在第一位（正确），巡检点3_加药系统排在第二位（也符合优先重试要求），然而根据背景信息，所有失败点必须排在其他正常点之前，本计划仅包含两个失败点和出入口，无其他正常点，因此顺序本身不违反优先级。但需注意：决策理由提到‘按就近原则安排这两个失败点的顺序’，而优先级规则未允许因路径效率调整失败点之间的顺序，仅要求失败点整体优先于正常点。由于本计划中无正常点，失败点之间顺序可接受。重新评估后，优先级逻辑实际正确。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_017.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_018.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_019.json",
+      "status": "success",
+      "srtp": false,
+      "arm": false,
+      "llm_reasoning": [
+        "优先级错误：决策理由指出'送水泵故障为严重异常，应最先处理'，但巡检点7_清水池（同为失败点）应在送水泵之后、其他正常点之前。然而计划中在失败点之后加入了正常点'巡检点1_进水pH'，违反了'失败点必须排在其他正常点之前'的规则。",
+        "机械臂动作映射错误：巡检点7_清水池的任务类型应为Task 1（检测/取样，因涉及水位检查），但其action被设为'execute_arm_task_2'且arm_task_type为2，与Task 1应映射为'execute_arm_task_1'不符。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_020.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_021.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_022.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_023.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_024.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_025.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_026.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_027.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_028.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_029.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_030.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_031.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_032.json",
+      "status": "eval_failed",
+      "reason": "Expecting ',' delimiter: line 5 column 516 (char 604)",
+      "srtp": false,
+      "arm": false
+    },
+    {
+      "file": "plan_LOG_20260214_033.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_034.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_035.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_036.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_037.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_038.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_039.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_040.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_041.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_042.json",
+      "status": "success",
+      "srtp": true,
+      "arm": false,
+      "llm_reasoning": [
+        "优先级错误：决策理由指出'送水泵故障为严重异常，需首先处理'，但巡检点8_送水泵在inspection_plan中排在入口之后第一个，符合要求；然而巡检点7_清水池上次失败，应紧随其后，但根据背景规则，所有failed点必须排在其他正常点之前（仅次于入口），此处仅安排了两个failed点，顺序正确。但进一步分析发现：decision_reason称'送水泵需首先处理'，计划中确实将送水泵排在清水池之前，符合优先级逻辑。因此优先级实际正确，此条错误不成立。重新评估：priority_correct应为true。",
+        "机械臂动作映射错误：巡检点7_清水池和巡检点8_送水泵的arm_task_type均为2，对应Task 2（设备检查/维护），应映射为action 'execute_arm_task_2'，计划中action字段正确。但需确认任务类型是否应为Task 1或Task 2。根据点名'清水池'通常涉及取样（Task 1），'送水泵'涉及设备检查（Task 2）。若源日志中巡检点7_清水池失败的任务类型为Task 1，则此处arm_task_type=2和action='execute_arm_task_2'错误。但待评估数据未提供源日志中的原始任务类型，仅能依据命名推测。严格按背景规则：Task 1必须映射为execute_arm_task_1，Task 2必须映射为execute_arm_task_2。由于计划中两个点均使用arm_task_type=2，若其中任一点实际应为Task 1，则违反规则。decision_reason描述'清水池检查失败'，'检查'可能属于Task 2，但'清水池'常关联取样（Task 1）。存在歧义，但质检员须严格依据给定信息。计划中将清水池标记为arm_task_type=2，若其真实任务类型为Task 1，则错误。然而，源日志内容未提供各点原始任务类型，无法100%确认。但根据常规理解，'清水池'巡检通常包含水质取样（Task 1），因此很可能此处应为Task 1，却错误配置为Task 2，导致action应为'execute_arm_task_1'而非'execute_arm_task_2'。",
+        "坐标范围检查：所有position坐标x、y均在0-20范围内，符合要求。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_043.json",
+      "status": "eval_failed",
+      "reason": "Expecting ',' delimiter: line 5 column 740 (char 828)",
+      "srtp": false,
+      "arm": false
+    },
+    {
+      "file": "plan_LOG_20260214_044.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_045.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_046.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_047.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": [
+        "优先级规则违反：决策理由指出巡检点2_沉淀池和巡检点8_送水泵均为上次失败点，应排在所有正常点之前（入口之后）。但根据优先级规则，所有失败点必须排在其他正常点之前，且未说明失败点之间可任意排序；更重要的是，两个失败点都应紧接在入口之后，但计划中将巡检点8_送水泵排在巡检点2_沉淀池之前，而决策理由未提供失败点间排序的合规依据。更关键的是，优先级规则要求‘该点在计划中必须排在其他正常点之前（仅次于入口）’，意味着所有失败点应连续出现在入口之后。然而，此处仅包含两个失败点且无其他正常点，看似满足，但问题在于：决策理由称‘先处理巡检点8再处理巡检点2可减少路径交叉’，这以路径优化为由调整了失败点顺序，但规则未允许在失败点之间基于路径优化调整顺序——规则仅强制失败点整体优先于正常点，并未授权失败点内部可按路径重排。严格来说，若两个点均为failed，则它们都必须在入口后、任何非failed点前，但彼此顺序是否可调？规则未明确禁止，但‘必须排在其他正常点之前’并不限制失败点内部顺序。然而，本例中 inspection_plan 仅包含这两个失败点和出入口，无其他正常点，因此失败点确实排在了所有非失败点（即无）之前，顺序本身可能可接受。但重新审视：decision_reason 明确指出两个点都是 failed，而 inspection_plan 中入口后第一个是巡检点8，第二个是巡检点2，两者均为 failed，没有插入非failed点，因此满足‘排在其他正常点之前’。所以 priority_correct 应为 true？但需注意：规则说‘该点在计划中必须排在其他正常点之前（仅次于入口）’，即每个 failed 点都必须出现在所有 non-failed 点之前，但 failed 点之间的相对顺序未规定。本计划中无 non-failed 巡检点，因此 failed 点顺序不影响优先级合规性。故 priority_correct 应为 true。但等等：inspection_plan 包含4个点：入口、巡检点8、巡检点2、出口。出口不是巡检点，属于路径终点。规则中的‘其他点’应指其他巡检点。因此，两个 failed 巡检点确实排在了所有（零个）正常巡检点之前。顺序合理。因此 priority_correct 应为 true。然而，仔细看 decision_reason：‘上次失败的巡检点2_沉淀池和巡检点8_送水泵必须优先重试，并排在所有其他点之前’，计划确实如此。所以 priority_correct 为 true。但最初判断错误。重新评估：无错误。priority_correct: true。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_048.json",
+      "status": "eval_failed",
+      "reason": "Expecting ',' delimiter: line 5 column 637 (char 725)",
+      "srtp": false,
+      "arm": false
+    },
+    {
+      "file": "plan_LOG_20260214_049.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_050.json",
+      "status": "success",
+      "srtp": true,
+      "arm": false,
+      "llm_reasoning": [
+        "巡检点7_清水池 的任务类型为 Task 2，但根据背景信息，Task 2 应映射为 action: \"execute_arm_task_2\"，此处 action 正确，但需确认是否应执行 Task 2；然而，更关键的问题是：巡检点7_清水池 在 decision_reason 中被描述为存在'警告'，应属于监控趋势的检测/取样任务（Task 1），但其 arm_task_type 为 2 且 action 为 execute_arm_task_2，与任务性质不符。",
+        "所有坐标均在 [0,20] 范围内，坐标有效。",
+        "入口和出口的 arm_task_type 为 0 且 action 为 \"arrive\"，符合规则。",
+        "巡检点1_进水pH 的 arm_task_type 为 1，action 为 execute_arm_task_1，符合 Task 1 映射规则。",
+        "巡检点8_送水泵 的 arm_task_type 为 2，action 为 execute_arm_task_2，符合 Task 2 映射规则。",
+        "主要问题：decision_reason 指出'进水pH和清水池存在警告，需安排检查以监控趋势'，'监控趋势'通常对应取样/检测（Task 1），但巡检点7_清水池 被分配为 Task 2（设备检查/维护），任务类型与业务语义不符，导致 arm_params_valid 为 false。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_051.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_052.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_053.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_054.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_055.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_056.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_057.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_058.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_059.json",
+      "status": "success",
+      "srtp": true,
+      "arm": false,
+      "llm_reasoning": [
+        "巡检点7_清水池 的任务类型为 Task 2（设备检查/维护），但其 action 应为 'execute_arm_task_2'，实际为 'execute_arm_task_2'，此项正确；然而根据背景信息，Task 1 对应 execute_arm_task_1，Task 2 对应 execute_arm_task_2，需结合 arm_task_type 判断。巡检点7_清水池 的 arm_task_type 为 2，action 为 execute_arm_task_2，匹配正确。",
+        "重新核查：巡检点6_消毒池 arm_task_type=1，action=execute_arm_task_1 → 正确；巡检点1_进水pH arm_task_type=1，action=execute_arm_task_1 → 正确；巡检点8_送水泵、3_加药系统、7_清水池 arm_task_type=2，action=execute_arm_task_2 → 均正确。",
+        "所有 action 与 arm_task_type 映射符合规则，无错误。",
+        "坐标检查：所有 position 值均在 [0,20] 范围内，合理。",
+        "发现错误：巡检点7_清水池 被分配了 arm_task_type=2（设备检查/维护），但根据 decision_reason，该点属于‘关键水质监测点’进行‘抽检’，应为检测/取样（Task 1）。因此 arm_task_type 应为 1，但当前为 2，导致 action 虽语法正确，但语义与任务类型不符。",
+        "同理，巡检点6_消毒池 作为水质监测点进行‘抽检’，应为 Task 1（arm_task_type=1），当前正确；但巡检点7_清水池 同样是水质监测点，却被设为 Task 2，存在任务类型分配错误。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_060.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_061.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_062.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_063.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_064.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_065.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_066.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_067.json",
+      "status": "eval_failed",
+      "reason": "Expecting ',' delimiter: line 5 column 607 (char 695)",
+      "srtp": false,
+      "arm": false
+    },
+    {
+      "file": "plan_LOG_20260214_068.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_069.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_070.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_071.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_072.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_073.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_074.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_075.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_076.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_077.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_078.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_079.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_080.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_081.json",
+      "status": "success",
+      "srtp": false,
+      "arm": false,
+      "llm_reasoning": [
+        "优先级规则违反：决策理由指出巡检点8_送水泵和巡检点2_沉淀池均为上次失败点，应排在其他正常点之前（入口之后）。但根据优先级规则，所有失败点中应将任意一个放在入口后第一个位置。然而，决策理由明确说明‘先处理巡检点8_送水泵再前往巡检点2_沉淀池’，而源日志中未提供失败点之间的相对优先级依据；更重要的是，若两个点都失败，按规则它们都必须排在其他正常点之前，但彼此之间的顺序若无额外约束可接受。然而，问题在于：检查 inspection_plan 发现入口后第一个点是巡检点8_送水泵（failed），第二个是巡检点2_沉淀池（failed），这本身不违反‘失败点优先于正常点’。但需确认是否两个失败点都被包含且无遗漏。关键错误在于：decision_reason 声称‘其余点上次均成功且可跳过’，因此计划只包含两个失败点，这符合规则。但 priority_correct 应为 true？重新审视：规则是‘如果源日志中某点状态为 failed，该点在计划中必须排在其他正常点之前（仅次于入口）’。本计划中没有正常点，只有两个失败点和出入口，因此只要失败点都在入口之后、出口之前即可。顺序在失败点之间无强制要求。因此 priority_correct 应为 true？但注意：decision_reason 中说‘先处理巡检点8_送水泵（南部）再前往巡检点2_沉淀池（北部中部）更合理’，这是路径优化，不违反优先级规则。所以 priority_correct 应为 true？然而，仔细看 inspection_plan：入口 → 巡检点8 → 巡检点2 → 出口。两个失败点确实都排在最前（因为没有其他点），满足规则。那为何判断为 false？可能误判。但再看：背景规则仅要求失败点排在其他正常点之前，并未要求失败点之间顺序。本例无正常点，因此顺序任意均可。故 priority_correct 应为 true。但等等：decision_reason 明确提到两个点都 failed，计划也只包含这两个失败点，顺序合理。所以 priority_correct 应为 true。然而，是否存在隐藏错误？检查 arm_task_type 与 action 是否匹配：巡检点8_送水泵 是 Task 2（设备检查/维护），action 为 execute_arm_task_2，正确；巡检点2_沉淀池 是 Task 1（检测/取样），action 为 execute_arm_task_1，正确。坐标均在 0-20 范围内。format_valid：包含所有必要字段。因此 errors 应为空。但原分析中误判 priority_correct 为 false。正确评估应为 true。然而，重新阅读优先级规则：‘该点在计划中必须排在其他正常点之前（仅次于入口）’。本计划中没有正常点，所以只要失败点出现在入口之后即可，无论顺序。因此 priority_correct 为 true。最终结论：所有项均正确。但 wait：inspection_plan 中的点顺序是 入口 → 点8 → 点2 → 出口。decision_reason 说点8 和 点2 都是 failed，所以都应优先。确实如此。没有正常点被插入在它们前面。所以 priority_correct 为 true。因此 errors 为空。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_082.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_083.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_084.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_085.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": [
+        "巡检点3_加药系统 的任务类型为 Task 2，但其 action 应为 execute_arm_task_2，实际为 execute_arm_task_2，此项正确；然而，根据背景信息，Task 1 对应 execute_arm_task_1，Task 2 对应 execute_arm_task_2，此处匹配正确。但需注意：arm_task_type 字段值为 2 表示 Task 2，action 为 execute_arm_task_2，符合规则。进一步检查坐标：所有 position 坐标均在 [0,20] 范围内，无异常。因此，arm_params_valid 应为 true。重新评估发现无错误，原判断有误。最终 arm_params_valid 为 true。"
+      ]
+    },
+    {
+      "file": "plan_LOG_20260214_086.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_087.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_088.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_089.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_090.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_091.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_092.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_093.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_094.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_095.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_096.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_097.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_098.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_099.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_LOG_20260214_100.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    },
+    {
+      "file": "plan_UNKNOWN_101.json",
+      "status": "success",
+      "srtp": true,
+      "arm": true,
+      "llm_reasoning": []
+    }
+  ]
+}

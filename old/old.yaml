@@ -1,0 +1,58 @@
+# patrol_points_arm.yaml
+# Far-Planner 巡检点配置文件（带机械臂任务支持）
+# 
+# arm_task 说明:
+#   0 - 不需要机械臂
+#   1 - 执行任务类型1 (发布 is_arrive=1)
+#   2 - 执行任务类型2 (发布 is_arrive=2)
+#
+# 格式1: {name: "名称", x: 10.0, y: 5.0, z: 0.0, arm_task: 1}
+# 格式2: [x, y, z, arm_task]
+
+patrol_points_arm:
+  # 入口 - 不需要机械臂
+  - {name: "入口", x: -4.5, y: 11.0, z: 0.0, arm_task: 0}
+  
+  # 货架A区 - 任务类型1
+  - {name: "货架A区", x: -3.0, y: -9.5, z: 0.0, arm_task: 1}
+  
+  # 货架B区 - 任务类型2
+  - {name: "货架B区", x: -1.5, y: -7.0, z: 0.0, arm_task: 2}
+  
+  # 中转点 - 不需要机械臂
+  - {name: "中转点", x: 0.0, y: -5.0, z: 0.0, arm_task: 0}
+  
+  # 货架C区 - 任务类型1
+  - {name: "货架C区", x: 1.5, y: -3.5, z: 0.0, arm_task: 1}
+  
+  # 出口 - 不需要机械臂
+  - {name: "出口", x: 3.0, y: -1.5, z: 0.0, arm_task: 0}
+
+
+# 简单格式示例:
+# patrol_points:
+#   - [5.0, 0.0, 0.0, 0]    # 不需要机械臂
+#   - [15.0, 5.0, 0.0, 1]   # 任务类型1
+#   - [25.0, 5.0, 0.0, 2]   # 任务类型2
+
+
+
+patrol_points:
+  - point_name: 入口
+    position: [-4.5, -11.0]
+    arm_task: 0
+  - point_name: 货架A区
+    position: [-3.0, -9.5]
+    arm_task: 1
+  - point_name: 货架B区
+    position: [-1.5, -7.0]
+    arm_task: 2
+  - point_name: 中转点
+    position: [0.0, -5.0]
+    arm_task: 0
+  - point_name: 货架C区
+    position: [1.5, -3.5]
+    arm_task: 1
+  - point_name: 出口
+    position: [3.0, -1.5]
+    arm_task: 0
