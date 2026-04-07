@@ -23,4 +23,4 @@ python generate_inspection_plan.py用来给出新的方案，评估前
  
  python evaluate_plans.py进行评估
  
- 当运行
+ 当运行这个时就会报关于代理和网络环境的错误，除夕左右的时候我调试好了一个环境，但是当他调用api的时候他会超时，还是无法调用
